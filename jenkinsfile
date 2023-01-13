@@ -9,7 +9,7 @@ pipeline{
         stage("Development"){
             steps{
             echo "Build Started"
-                sh 'docker build -t nannepagajoseph/bookstore_ui'
+                sh 'docker build -t nannepagajoseph/bookstore_ui .'
             echo "Build Completed"
             }
         }
