@@ -1,0 +1,38 @@
+pipeline{
+    agent any
+    stages{
+        stage("Pre-build"){
+            steps{
+                echo "Pipeline initiated on ${GIT_BRANCH} branch."
+            }
+        }
+        stage("Development"){
+            echo "Build Started"
+            steps{
+                pwsh (script: """
+                docker build -t nannepagajoseph/bookstore_ui
+                """)
+            }
+            echo "Build Completed"
+        }
+        stage("Tests"){
+            echo "Tests Started"
+            steps{
+                pwsh (script: """
+                npm run test
+                """)
+            }
+            echo "Tests Completed"
+        }
+        stage("Vulnerability Tracer - Trivy"){
+            echo "Tracer Started"
+            steps{
+                pwsh (script: """
+                C:\\Windows\\System32\\Wsl.exe --
+                sudo trivy nannepagajoseph/bookstore_ui
+                """)
+            }
+            echo "Tracer Completed"
+        }
+    }
+}
