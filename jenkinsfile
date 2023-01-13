@@ -9,28 +9,21 @@ pipeline{
         stage("Development"){
             steps{
             echo "Build Started"
-                pwsh (script: """
-                docker build -t nannepagajoseph/bookstore_ui
-                """)
+                sh 'docker build -t nannepagajoseph/bookstore_ui'
             echo "Build Completed"
             }
         }
         stage("Tests"){
             steps{
             echo "Tests Started"
-                pwsh (script: """
-                npm run test
-                """)
+                sh'npm run test'
             echo "Tests Completed"
             }
         }
         stage("Vulnerability Tracer - Trivy"){
             steps{
             echo "Tracer Started"
-                pwsh (script: """
-                C:\\Windows\\System32\\Wsl.exe --
-                sudo trivy nannepagajoseph/bookstore_ui
-                """)
+                sh'C:\\Windows\\System32\\Wsl.exe -- sudo trivy nannepagajoseph/bookstore_ui'
             echo "Tracer Completed"
             }
         }
