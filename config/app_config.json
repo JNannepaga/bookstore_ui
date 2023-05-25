@@ -1,5 +1,5 @@
 {
-    "dev":{
-        "base_url": "https://localhost:44370"
-    }
+  "dev": {
+    "base_url": "https://localhost:44370"
+  }
 }

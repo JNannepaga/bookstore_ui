@@ -3,7 +3,6 @@ import { shallow } from 'enzyme';
 import { AddBook } from '../components/AddBook';
 import { BookList } from '../components/BookList';
 import { BookManager } from './BookManager';
-import { books_api_service } from '../services/api';
 
 jest.mock('../services/api', () => ({
   books_api_service: {
@@ -12,8 +11,7 @@ jest.mock('../services/api', () => ({
   },
 }));
 
-
-describe('component', ()=>{
+describe('component', () => {
   describe('BookManager', () => {
     beforeEach(() => {
       jest.clearAllMocks();

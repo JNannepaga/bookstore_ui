@@ -62,11 +62,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/m
 This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
 ### Containerize
+
 Build docker build -t nannepagajoseph/bookstore_ui:tag_name Dir
 Publish docker push nannepagajoseph/bookstore_ui:tag_name
 Run docker run --name instance_name -d -p 3000:3000 nannepagajoseph/bookstore_ui:tag_name
 
 ### Deployment
+
 This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
 ### `npm run build` fails to minify

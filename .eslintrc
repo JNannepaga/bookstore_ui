@@ -1,0 +1,7 @@
+{
+  "ignorePatterns": ["coverage/", "build/"],
+  "extends": ["react-app", "react-app/jest", "prettier"],
+  "rules": {
+    "semi":"warn"
+  }
+}
