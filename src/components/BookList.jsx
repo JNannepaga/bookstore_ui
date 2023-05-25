@@ -1,27 +1,26 @@
-import React, { useEffect, useState } from "react";
-import {books_api_service} from "../services/api";
-import {BookListItem} from "./BookListItem";
+import React from "react";
+import {Table} from "antd";
 
-export const BookList=()=>{
-    const [data, setData] = useState([]);
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(()=>{
-        async function fetchBooksAsync(){
-            const books = await books_api_service();
-            setData(books);
-        }
-        fetchBooksAsync();
-    },[])
-
-    return <React.Fragment>
-        <h1>Books collection in our store</h1>
+export const BookList=({booksData})=>{
+    const booksColumns = [
         {
-            data.map(book => 
-                <div key={book.id}>
-                    <BookListItem {...book}/>
-                </div>
-            )
+            title: "Book Name",
+            dataIndex: "name",
+            key: "name"
+        },
+        {
+            title: "Cost",
+            dataIndex: "price",
+            key: "price"
+        },
+        {
+            title: "Genere",
+            dataIndex: "genere",
+            key: "genere"
         }
+    ]
+    return <React.Fragment>
+        <h3>Books collection in our store</h3>
+        <Table dataSource={booksData} columns={booksColumns} rowKey={"id"} />
     </React.Fragment>
 }
