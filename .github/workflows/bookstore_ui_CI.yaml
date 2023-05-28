@@ -77,4 +77,4 @@ jobs:
         run: npm ci
 
       - name: Running Tests
-        run: npm run test:coverage-report
+        run: npm run test
