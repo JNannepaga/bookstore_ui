@@ -1,26 +1,26 @@
-version: "3.9"
+version: '3.9'
 services:
   bookstore-db:
-    image: "mongo:latest"
-    container_name: "bookstore-db-container"
+    image: 'mongo:latest'
+    container_name: 'bookstore-db-container'
     ports:
-       - "27017:27017" #Expose this if you want to connect mongo-client(compass) from external sources(Web).
+      - '27017:27017' #Expose this if you want to connect mongo-client(compass) from external sources(Web).
 
   bookstore-api:
-    image: "nannepagajoseph/bookstore-api"
-    container_name: "bookstore-api-container"
+    image: 'nannepagajoseph/bookstore-api'
+    container_name: 'bookstore-api-container'
     links:
-      - "bookstore-db"
+      - 'bookstore-db'
     ports:
-      - "5000:80"
-      - "5001:443"
+      - '4004:80'
+      - '4005:443'
     environment:
       - ASPNETCORE_ENVIRONMENT=Bookstore_DockerCompose
-      
+
   bookstore-ui:
-    image: "nannepagajoseph/bookstore_ui"
-    container_name: "bookstore-ui-container"
+    image: 'nannepagajoseph/bookstore_ui'
+    container_name: 'bookstore-ui-container'
     ports:
-      - "3777:3000"
+      - '3777:3000'
     environment:
-      - REACT_APP_BASE_URL=http://localhost:5000
+      - REACT_APP_BOOKSTORE_API_BASE_URL=http://localhost:4004

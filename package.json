@@ -3,15 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "serve": "^14.2.0",
     "antd": "^5.5.1",
     "axios": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "dotenv-expand": "^10.0.0",
+    "minimist": "^1.2.8",
+    "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "serve": "^14.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node generate-env.js && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "coverage-report": "react-scripts test --coverage",

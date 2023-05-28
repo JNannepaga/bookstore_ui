@@ -1,0 +1,6 @@
+{
+    "bookstoreApi":{
+        "getBooks": "/api/Books/GetBooks",
+        "addBook": "/api/Books/AddBook"
+    }
+}

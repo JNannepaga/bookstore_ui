@@ -1,16 +1,17 @@
 import axios from 'axios';
+import { ADD_BOOK_URI, BASE_URL, GET_BOOKS_URI } from './serviceDiscovery';
 
 const api_service = {
-  get: (URI) => {
+  get: (uri) => {
     return axios({
       method: 'GET',
-      url: process.env.REACT_APP_BASE_URL + URI,
+      url:BASE_URL + uri,
     });
   },
-  post: (URI, data) => {
+  post: (uri, data) => {
     return axios({
       method: 'POST',
-      url: process.env.REACT_APP_BASE_URL + URI,
+      url: BASE_URL + uri,
       data,
     });
   },
@@ -19,7 +20,7 @@ const api_service = {
 export const books_api_service = () => ({
   getBooks: () =>
     api_service
-      .get(process.env.REACT_APP_URI_GET_BOOKS)
+      .get(GET_BOOKS_URI)
       .then((resp) => {
         const data = resp.data;
         return data;
@@ -31,7 +32,7 @@ export const books_api_service = () => ({
 
   addBook: (data) =>
     api_service
-      .post(process.env.REACT_APP_URI_ADD_BOOK, data)
+      .post(ADD_BOOK_URI, data)
       .then((resp) => {
         const data = resp.data;
         return data;
