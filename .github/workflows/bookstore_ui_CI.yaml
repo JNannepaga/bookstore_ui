@@ -9,7 +9,7 @@ on:
       - master
 
 env:
-  cache-node_modules-name: npm_packages
+  cache-node_modules-name: npm-packages
 
 jobs:
   linting:
