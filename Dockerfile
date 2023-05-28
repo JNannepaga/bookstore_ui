@@ -1,6 +1,6 @@
 FROM node:19-alpine3.15 AS base
 
-LABEL version="1.0.4"
+LABEL version="1.0.5"
 LABEL description="This is the Bookstore docker image"
 LABEL maintainer = ["joseph.nannepaga@gmail.com"]
 
@@ -10,11 +10,11 @@ WORKDIR /app
 
 COPY package.json .
 COPY package-lock.json .
-RUN npm install
+RUN  npm ci --silent
 COPY . .
 
 # Set the PATH environment variable
-#ENV PATH="app/node_modules/.bin:$PATH"
+ENV PATH="app/node_modules/.bin:$PATH"
 ENV NODE_ENV=production
 ENV REACT_APP_BOOKSTORE_API_BASE_URL=http://localhost:5000
 

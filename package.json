@@ -12,14 +12,22 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "serve": "^14.2.0"
+    "serve": "^14.2.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.7",
+    "enzyme-to-json": "^3.6.2",
+    "jest": "^29.5.0",
+    "web-vitals": "^2.1.4",
+    "eslint-config-prettier": "^8.8.0",
+    "prettier": "^2.8.8"
   },
   "scripts": {
     "start": "node generate-env.js && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "coverage-report": "react-scripts test --coverage",
-    "format": "prettier --write .",
+    "test:coverage-report": "react-scripts test --coverage",
+    "lint": "prettier --check \"src/**/*.{js,jsx}\"",
+    "lint:fix": "prettier --write .",
     "eject": "react-scripts eject",
     "serve": "serve build"
   },
@@ -38,13 +46,6 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.7",
-    "enzyme-to-json": "^3.6.2",
-    "jest": "^29.5.0",
-    "web-vitals": "^2.1.4",
-    "eslint-config-prettier": "^8.8.0",
-    "prettier": "^2.8.8"
+    "@testing-library/user-event": "^13.5.0"
   }
 }

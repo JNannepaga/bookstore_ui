@@ -2,3 +2,12 @@
 /coverage
 /build
 /public
+/scripts
+.docker
+.dockerignore
+docker-compose.yaml
+.eslintrc
+.gitignore
+.prettierignore
+.prettierrc
+jenkinsfile

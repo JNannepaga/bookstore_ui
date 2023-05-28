@@ -3,9 +3,10 @@ import { ADD_BOOK_URI, BASE_URL, GET_BOOKS_URI } from './serviceDiscovery';
 
 const api_service = {
   get: (uri) => {
-    return axios({
+    return axios(
+      {
       method: 'GET',
-      url:BASE_URL + uri,
+      url: BASE_URL + uri,
     });
   },
   post: (uri, data) => {

@@ -1,0 +1,81 @@
+name: bookstore_ui CI
+
+on:
+    push: 
+        branches:
+            - master
+    pull_request:
+        branches:
+            - master
+
+env:
+              
+jobs:
+    linting:
+        name: Linter
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                node-version: '14'
+
+            - name: Checkout code
+              uses: actions/checkout@v2
+  
+            - name: Caching dependencies
+              id: cache-node_modules
+              uses: actions/cache@v3
+              with:
+                # npm cache files are stored in `~/.npm` on Linux/macOS
+                path: ~/.npm
+                key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+                restore-keys: |
+                    ${{ runner.os }}-npm-
+            
+            - name: Install dependencies
+              if: steps.cache-node_modules.outputs.cache-hit != 'true'  # Run only if cache is not found
+              run: npm ci        
+            
+            - name: Run Prettier Linter
+              run: |
+                echo "Running Prettier Linter"
+                npm run lint
+                lint_exit_code=$?
+                if [ $lint_exit_code -ne 0 ]; then
+                    echo "Linting failed. Exiting pipeline..."
+                    exit $lint_exit_code
+                fi
+
+    Tests:
+        name: Tests
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                node-version: '14'
+
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Restore cache
+              id: restore-cache-node_modules  
+              uses: actions/cache@v3
+              with:
+                path: ~/.npm
+                key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+                restore-keys: |
+                  ${{ runner.os }}-npm-
+            
+            - name: Install dependencies
+              if: steps.restore-cache-node_modules.outputs.cache-hit != 'true'  # Run only if cache is not found
+              run: npm ci
+            
+            - name: Running Tests
+              run: npm run test:coverage-report
+              
+
+    
