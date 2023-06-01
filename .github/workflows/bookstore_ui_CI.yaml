@@ -110,11 +110,11 @@ jobs:
 
       - name: Create CodeQL database
         run: |
-          codeql database create --language=javascript --source-root=. --name=bookstore-codeql-db
+          /usr/bin/codeql database create --language=javascript --source-root=. --name=bookstore-codeql-db
 
       - name: Run Code-QL analysis
         run: |
-          codeql analyze --database=bookstore-codeql-db --format=sarif --output=analysis-results.sarif
+          /usr/bin/codeql analyze --database=bookstore-codeql-db --format=sarif --output=analysis-results.sarif
 
       - name: Upload CodeQL results
         uses: actions/upload-artifact@v3
