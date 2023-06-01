@@ -101,6 +101,8 @@ jobs:
 
       - name: Install CodeQL CLI
         uses: github/codeql-action/init@v2
+        with:
+          languages: javascript
 
       - name: Create CodeQL database
         run: |
