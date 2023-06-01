@@ -113,11 +113,13 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
+        with:
+          upload: /bookstore_ui/${{ github.workspace }}/codeql-results-${{ github.event.pull_request.number }}-${{ github.run_id }}
 
       - name: Upload Analysis Results
         uses: actions/upload-artifact@v3
         with:
-          path: /home/runner/work/_temp/codeql_databases/javascript 
+          path: /bookstore_ui/${{ github.workspace }}/codeql-results-${{ github.event.pull_request.number }}-${{ github.run_id }}
   
   build:
     name: Build
