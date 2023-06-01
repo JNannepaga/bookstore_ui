@@ -95,36 +95,20 @@ jobs:
       security-events: write
 
     steps:
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-
-      - name: Setup CodeQL
-        uses: github/codeql-action/setup-codeql@v1
-
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install CodeQL CLI
+      - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
           languages: javascript
 
-      - name: Create CodeQL database
-        run: |
-          /usr/bin/codeql database create --language=javascript --source-root=. --name=bookstore-codeql-db
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v2
 
-      - name: Run Code-QL analysis
-        run: |
-          /usr/bin/codeql analyze --database=bookstore-codeql-db --format=sarif --output=analysis-results.sarif
-
-      - name: Upload CodeQL results
-        uses: actions/upload-artifact@v3
-        with:
-          name: codeql-results
-          path: analysis-results.sarif
-
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+  
   build:
     name: Build
     runs-on: ubuntu-latest
