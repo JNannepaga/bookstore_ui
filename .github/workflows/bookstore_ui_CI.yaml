@@ -100,7 +100,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install CodeQL CLI
-        uses: github/codeql-action/init@v1
+        uses: github/codeql-action/init@v2
 
       - name: Create CodeQL database
         run: |
@@ -111,7 +111,7 @@ jobs:
           codeql analyze --database=bookstore-codeql-db --format=sarif --output=analysis-results.sarif
 
       - name: Upload CodeQL results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: codeql-results
           path: analysis-results.sarif
