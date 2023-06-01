@@ -38,7 +38,7 @@ jobs:
       - name: Install dependencies
         if: steps.cache-node_modules.outputs.cache-hit != 'true'
         run: npm ci
-        
+
       - name: Run Prettier Linter
         run: |
           echo "Running Prettier Linter"
@@ -78,3 +78,49 @@ jobs:
 
       - name: Running Tests
         run: npm install react-scripts && npm run test:coverage-report
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage/lcov.info
+
+  code-scanner:
+    name: CodeQL Analysis
+    runs-on: ubuntu-latest
+    needs: [linting]
+
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install CodeQL CLI
+        uses: github/codeql-action/init@v1
+
+      - name: Create CodeQL database
+        run: |
+          codeql database create --language=javascript --source-root=. --name=bookstore-codeql-db
+
+      - name: Run CodeQL analysis
+        run: |
+          codeql analyze --database=bookstore-codeql-db --format=sarif --output=analysis-results.sarif
+
+      - name: Upload CodeQL results
+        uses: actions/upload-artifact@v2
+        with:
+          name: codeql-results
+          path: analysis-results.sarif
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: [linting, Tests, code-scanner]
+
+    steps:
+      - name: Build
+        run: npm run build
