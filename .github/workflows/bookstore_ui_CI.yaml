@@ -109,6 +109,14 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
 
+      - name: Cache CodeQL Results
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace }}/codeql-results
+          key: codeql-results-${{ github.event.pull_request.number }}-${{ github.run_id }}
+          restore-keys: |
+            codeql-results-${{ github.event.pull_request.number }}-
+    
       - name: Rename Results Folder
         run: |
           mv ${{ github.workspace }}/codeql-results ${{ github.workspace }}/codeql-results-${{ github.event.pull_request.number }}-${{ github.run_id }}
