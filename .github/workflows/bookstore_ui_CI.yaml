@@ -108,6 +108,16 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
+
+      - name: Rename Results Folder
+        run: |
+          mv ${{ github.workspace }}/codeql-results ${{ github.workspace }}/codeql-results-${{ github.event.pull_request.number }}-${{ github.run_id }}
+    
+      - name: Upload Analysis Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: Analysis Results
+          path: ${{ github.workspace }}/codeql-results-${{ github.event.pull_request.number }}-${{ github.run_id }}
   
   build:
     name: Build
@@ -115,5 +125,26 @@ jobs:
     needs: [linting, Tests, code-scanner]
 
     steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Restore cache
+        id: restore-cache-node_modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-${{env.cache-node_modules-name}}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{env.cache-node_modules-name}}-
+
+      - name: Install dependencies
+        if: steps.restore-cache-node_modules.outputs.cache-hit != 'true' # Run only if cache is not found
+        run: npm ci
+
       - name: Build
-        run: npm run build
+        run: npm install react-scripts && npm run build
