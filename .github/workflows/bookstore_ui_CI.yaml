@@ -108,7 +108,7 @@ jobs:
         run: |
           codeql database create --language=javascript --source-root=. --name=bookstore-codeql-db
 
-      - name: Run CodeQL analysis
+      - name: Run Code-QL analysis
         run: |
           codeql analyze --database=bookstore-codeql-db --format=sarif --output=analysis-results.sarif
 
