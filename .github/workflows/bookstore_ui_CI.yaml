@@ -110,7 +110,7 @@ jobs:
         uses: github/codeql-action/analyze@v2
 
       - name: Cache CodeQL Results
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ github.workspace }}/codeql-results
           key: codeql-results-${{ github.event.pull_request.number }}-${{ github.run_id }}
@@ -124,7 +124,7 @@ jobs:
           fi
   
       - name: Upload Analysis Results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Analysis Results
           path: ${{ github.workspace }}/codeql-results-${{ github.event.pull_request.number }}-${{ github.run_id }}
