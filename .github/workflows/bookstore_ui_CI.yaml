@@ -95,6 +95,11 @@ jobs:
       security-events: write
 
     steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -110,7 +115,7 @@ jobs:
         uses: github/codeql-action/analyze@v2
 
       - name: Upload Analysis Results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Analysis Results
           path: ${{ github.workspace }}/codeql-results
