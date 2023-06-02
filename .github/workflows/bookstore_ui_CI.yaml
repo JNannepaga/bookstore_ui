@@ -10,10 +10,7 @@ on:
 
 env:
   cache-node_modules-name: npm-packages
-<<<<<<< Updated upstream
-=======
   DOCKER_USERNAME_TAG: nannepagajoseph
->>>>>>> Stashed changes
 
 jobs:
   linting:
