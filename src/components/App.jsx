@@ -5,7 +5,7 @@ import { BookManager } from './BookManager';
 function App() {
   return (
     <div>
-      <h1>Welcome to bookstore App</h1>
+      <h1>Welcome to bookstore App.</h1>
       <BookManager />
     </div>
   );
