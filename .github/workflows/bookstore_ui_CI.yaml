@@ -168,6 +168,16 @@ jobs:
       - name: Taging an Image
         run: docker tag ${{ secrets.DOCKERHUB_USERNAME }}/bookstore_ui:${{ github.event.pull_request.number }}-${{ github.run_id }}
 
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: '${{ secrets.DOCKERHUB_USERNAME }}/bookstore_ui:${{ github.event.pull_request.number }}-${{ github.run_id }}'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
       - name: Shipping Image to Docker Hub
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/bookstore_ui:${{ github.event.pull_request.number }}-${{ github.run_id }}      
         
