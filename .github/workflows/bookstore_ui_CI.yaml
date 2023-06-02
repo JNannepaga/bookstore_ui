@@ -152,3 +152,9 @@ jobs:
 
       - name: Build
         run: npm install react-scripts && npm run build
+      
+      - name: Install Snyk CLI
+        run: npm install -g snyk
+
+      - name: Scan build files with Snyk
+        run: snyk test --all-projects --all-sub-projects --file=./build
