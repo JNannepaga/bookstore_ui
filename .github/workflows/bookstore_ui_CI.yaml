@@ -167,7 +167,7 @@ jobs:
           docker login --username "${DOCKERHUB_USERNAME}" --password "${DOCKERHUB_TOKEN}"
       
       - name: Building Image
-        run: docker build bookstore_ui .
+        run: docker build -t bookstore_ui .
 
       - name: Taging an Image
         run: docker tag ${{ secrets.DOCKERHUB_USERNAME }}/bookstore_ui:${{ github.event.pull_request.number }}-${{ github.run_id }}
