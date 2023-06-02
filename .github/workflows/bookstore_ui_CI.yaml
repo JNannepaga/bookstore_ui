@@ -160,8 +160,12 @@ jobs:
 
     steps:
       - name: Log in to Docker Hub
-        run: docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_TOKEN }}
-
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKER_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        run: |
+          docker login --username "${DOCKERHUB_USERNAME}" --password "${DOCKERHUB_TOKEN}"
+      
       - name: Building Image
         run: docker build bookstore_ui .
 
