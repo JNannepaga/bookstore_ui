@@ -159,6 +159,27 @@ jobs:
     needs: build
 
     steps:
+      - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Restore cache
+        id: restore-cache-node_modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-${{env.cache-node_modules-name}}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{env.cache-node_modules-name}}-
+
+      - name: Install dependencies
+        if: steps.restore-cache-node_modules.outputs.cache-hit != 'true' # Run only if cache is not found
+        run: npm ci
+
       - name: Log in to Docker Hub
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
