@@ -157,4 +157,4 @@ jobs:
         run: npm install -g snyk
 
       - name: Scan build files with Snyk
-        run: snyk test --all-projects --all-sub-projects --file=./build
+        run: snyk test --file=./build
