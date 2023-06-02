@@ -25,7 +25,7 @@ export const AddBook = ({ onSaveBook }) => {
             label="Book Name"
             name="name"
             rules={[
-              { required: true, message: 'Please enter name of the book!' },
+              { required: true, message: 'Please enter name of the book.!' },
             ]}
           >
             <Input />
