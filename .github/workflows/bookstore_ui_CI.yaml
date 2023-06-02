@@ -191,7 +191,7 @@ jobs:
         run: docker build -t bookstore_ui .
 
       - name: Taging an Image
-        run: docker tag ${{ secrets.DOCKERHUB_USERNAME }}/bookstore_ui:${{ github.event.pull_request.number }}-${{ github.run_id }}
+        run: docker tag bookstore_ui ${{ secrets.DOCKERHUB_USERNAME }}/bookstore_ui:${{ github.event.pull_request.number }}-${{ github.run_id }}
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
