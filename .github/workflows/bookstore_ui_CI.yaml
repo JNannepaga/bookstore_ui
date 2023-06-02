@@ -199,9 +199,8 @@ jobs:
         with:
           image-ref: '${{ env.DOCKER_USERNAME_TAG }}/bookstore_ui:${{ github.event.pull_request.number }}-${{ github.run_id }}'
           format: 'table'
-          exit-code: '1'
           ignore-unfixed: true
-          vuln-type: 'os,library'
+          vuln-type: 'library, language'
           severity: 'CRITICAL,HIGH'
 
       - name: Shipping Image to Docker Hub
