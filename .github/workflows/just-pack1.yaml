@@ -10,6 +10,7 @@ on:
 
 env:
   cache-node_modules-name: npm-packages
+  DOCKER_USERNAME: ${{ vars.DOCKER_USERNAME }}
 
 jobs:
   Shiping:
