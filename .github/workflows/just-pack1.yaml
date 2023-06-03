@@ -41,7 +41,7 @@ jobs:
         run: |
           BUILD_TAG="$DOCKERHUB_USERNAME/bookstore_ui:${{ github.event.pull_request.number }}-${{ github.run_id }}"
           echo "BUILD_TAG=$BUILD_TAG" >> $GITHUB_OUTPUT
-          docker tag bookstore_ui ${{ steps.Image-Tagger.outputs.BUILD_TAG }}"
+          docker tag bookstore_ui $BUILD_TAG"
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
