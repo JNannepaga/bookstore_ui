@@ -10,7 +10,7 @@ on:
 
 env:
   cache-node_modules-name: npm-packages
-  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKERHUB_USERNAME: nannepagajoseph
 
 jobs:
   Shiping:
@@ -28,7 +28,7 @@ jobs:
       
       - name: Log in to Docker Hub
         env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_USERNAME: ${{env.DOCKERHUB_USERNAME}}
           DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         run: |
           docker login --username "${DOCKER_USERNAME}" --password "${DOCKER_TOKEN}"
@@ -39,7 +39,7 @@ jobs:
       - name: Tagging an Image
         id: Image-Tagger
         run: |
-          BUILD_TAG="${DOCKER_USERNAME}/bookstore_ui:${{ github.event.pull_request.number }}-${{ github.run_id }}"
+          BUILD_TAG="$DOCKERHUB_USERNAME/bookstore_ui:${{ github.event.pull_request.number }}-${{ github.run_id }}"
           echo "BUILD_TAG=$BUILD_TAG" >> $GITHUB_OUTPUT
           docker tag bookstore_ui ${{ env.BUILD_TAG }}"
 
